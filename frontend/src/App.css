@@ -1,0 +1,190 @@
+#app {
+    height: 100vh;
+    text-align: center;
+}
+
+#logo {
+    display: block;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    padding: 10% 0 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-origin: content-box;
+}
+
+#body {
+    padding: 20px; /* 为容器添加一些内边距 */
+}
+
+.result {
+    height: 20px;
+    line-height: 20px;
+    margin: 1.5rem auto;
+}
+
+.input-box .btn {
+    width: 60px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 3px;
+    border: none;
+    margin: 0 0 0 20px;
+    padding: 0 8px;
+    cursor: pointer;
+}
+
+.input-box .btn:hover {
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+    color: #333333;
+}
+
+.input-box .input {
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    background-color: rgba(240, 240, 240, 1);
+    -webkit-font-smoothing: antialiased;
+}
+
+.input-box .input:hover {
+    border: none;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.input-box .input:focus {
+    border: none;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.tools-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    text-align: left; /* 这行确保内容居左 */
+}
+
+.fixed-sider {
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.main-content {
+    overflow: auto;
+    height: 100vh;
+    background-color: #23272f;
+}
+
+.ant-tabs-tab {
+    border-width: 2px !important; /* 设置你需要的边框宽度 */
+    border-style: solid !important;
+}
+
+/* 选中的标签页样式 */
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    background-color: white; /* 与侧边栏相同的颜色 */
+    color: #23272f; /* 文字颜色为白色 */
+}
+
+/* 未选中的标签页样式 */
+.ant-tabs-tab .ant-tabs-tab-btn {
+    background-color: #23272f; /* HomePage 的背景色 */
+    color: white; /* 与侧边栏相同的颜色 */
+}
+
+pre {
+    width: 100%;
+    overflow-x: auto; /* Allow horizontal scrolling if the content overflows */
+}
+
+.content {
+    white-space: pre-wrap; /* Allows the content to wrap */
+    word-wrap: break-word; /* Break long words */
+}
+
+.language-label {
+    color: white;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.button {
+    color: #27e1fa;
+    margin: 0;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    outline: none;
+    padding: 0;
+    position: relative;
+    font-size: 14px;
+    text-align: center;
+    background: transparent;
+    transition: color 250ms ease-out;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+/* 修改 Ant Design 分页数字的颜色 */
+.ant-pagination .ant-pagination-item a {
+    color: rgb(43, 172, 237); /* 或您想要的任何颜色 */
+}
+
+/* 修改 Ant Design 分页数字的悬浮颜色 */
+.ant-pagination-item a:hover {
+    color: hsla(80, 83%, 64.18%, 1); /* 或您想要的任何颜色 */
+}
+
+.ant-pagination-item-ellipsis {
+    color: rgb(43, 172, 237) !important; /* 或您想要的任何颜色 */
+}
+
+.ant-pagination-item-ellipsis a:hover {
+    color: hsla(80, 83%, 64.18%, 1); /* 或您想要的任何颜色 */
+}
+
+.ant-pagination .ant-pagination-next button {
+    color: rgb(43, 172, 237); /* 或您想要的任何颜色 */
+}
+
+.ant-pagination-next button:hover {
+    color: hsla(80, 83%, 64.18%, 1); /* 或您想要的任何颜色 */
+}
+
+.ant-pagination .ant-pagination-prev button {
+    color: rgb(43, 172, 237); /* 或您想要的任何颜色 */
+}
+
+.ant-pagination-prev button:hover {
+    color: hsla(80, 83%, 64.18%, 1); /* 或您想要的任何颜色 */
+}
+
+.ant-pagination-item-link-icon {
+    color: hsla(80, 83%, 64.18%, 1) !important; /* 或您想要的任何颜色 */
+}
+
+.addonBeforeWhite {
+    color: white;
+}
+
+.ant-collapse-header-text {
+    color: white;
+}
+
+.ant-collapse-expand-icon {
+    color: white;
+}

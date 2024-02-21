@@ -1,0 +1,11 @@
+.ToolCard [data-name=bg] {
+    color: hsla(200, 81%, 50%, 0.05);
+}
+
+.ToolCard [data-name=line] {
+    color: hsla(200, 84%, 54.74%, 1);
+}
+
+.code-highlight-box code {
+    font-size: 14px;  /* 调整这里的值以达到你想要的大小 */
+}
