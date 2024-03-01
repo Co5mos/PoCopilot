@@ -58,6 +58,8 @@ https://www.baidu.com
 
 ## 手动编译
 
+v0.0.1
+
 可参考 [Dockerfile](./Dockerfile) 进行编译。
 
 1. 安装 go 1.21 及以上版本
