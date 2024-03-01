@@ -44,14 +44,15 @@ jobs:
       - name: Install dependencies
         run: |
           go install github.com/wailsapp/wails/v2/cmd/wails@latest
-          cd frontend && npm i react && npm install antd --save
+          go mod tidy
+          cd frontend && npm i react && npm install antd --save && npm i
 
       - name: Build for ${{ matrix.GOOS }}-${{ matrix.GOARCH }}
         env:
           GOOS: ${{ matrix.GOOS }}
           GOARCH: ${{ matrix.GOARCH }}
           FILE_NAME: PoCopilot-${{ matrix.GOOS }}-${{ matrix.GOARCH }}.exe
-        run: $HOME/go/bin/wails build -trimpath -skipbindings -o ${{ env.FILE_NAME }}
+        run: $HOME/go/bin/wails build -m -s -trimpath -skipbindings -o ${{ env.FILE_NAME }}
 
       - name: Upload ${{ matrix.GOOS }}-${{ matrix.GOARCH }}
         uses: actions/upload-release-asset@v1
