@@ -1,6 +1,9 @@
-# PoCopilot
+<div align="center">
+  <img src="build/appicon.png" alt="PoCopilot" width="200">
+  <h1>PoCopilot</h1>
+  <p>PoCopilot is a toolkit designed to assist in the development of POCs by Wails + React.</p>
+</div>
 
-PoCopilot is a toolkit designed to assist in the development of POCs.
 
 ## 工具说明
 
