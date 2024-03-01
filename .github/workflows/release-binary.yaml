@@ -44,10 +44,7 @@ jobs:
       - name: Install dependencies
         run: |
           go install github.com/wailsapp/wails/v2/cmd/wails@latest
-          cd frontend && npm i react && npm install
-
-      - name: Build Frontend
-        run: cd frontend && npm run build
+          cd frontend && npm i react && npm install antd --save
 
       - name: Build for ${{ matrix.GOOS }}-${{ matrix.GOARCH }}
         env:
