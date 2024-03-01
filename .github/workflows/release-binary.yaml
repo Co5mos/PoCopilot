@@ -27,8 +27,8 @@ jobs:
     permissions: write-all
     strategy:
       matrix:
-        GOOS: [windows, darwin]
-        GOARCH: [amd64, arm64]
+        GOOS: [windows]
+        GOARCH: [amd64, arm64, 386]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -50,8 +50,8 @@ jobs:
         env:
           GOOS: ${{ matrix.GOOS }}
           GOARCH: ${{ matrix.GOARCH }}
-          FILE_NAME: PoCopilot-${{ matrix.GOOS }}-${{ matrix.GOARCH }}${{ endsWith(github.ref_name, 'windows') && '.exe' || '' }}
-        run: $HOME/go/bin/wails build -m -s -trimpath -skipbindings -devtools -o ${{ env.FILE_NAME }}
+          FILE_NAME: PoCopilot-${{ matrix.GOOS }}-${{ matrix.GOARCH }}.exe
+        run: $HOME/go/bin/wails build -o ${{ env.FILE_NAME }}
 
       - name: Upload ${{ matrix.GOOS }}-${{ matrix.GOARCH }}
         uses: actions/upload-release-asset@v1
