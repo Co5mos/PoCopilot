@@ -13,6 +13,8 @@ jobs:
       - name: Create release
         id: create_release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}
           release_name: ${{ github.ref_name }}
@@ -25,8 +27,8 @@ jobs:
     permissions: write-all
     strategy:
       matrix:
-        GOOS: [windows]
-        GOARCH: [amd64, arm64, 386]
+        GOOS: [windows, darwin]
+        GOARCH: [amd64, arm64]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -42,7 +44,7 @@ jobs:
       - name: Install dependencies
         run: |
           go install github.com/wailsapp/wails/v2/cmd/wails@latest
-          cd frontend && npm install
+          cd frontend && npm i react && npm install
 
       - name: Build Frontend
         run: cd frontend && npm run build
@@ -51,12 +53,13 @@ jobs:
         env:
           GOOS: ${{ matrix.GOOS }}
           GOARCH: ${{ matrix.GOARCH }}
-          FILE_NAME: PoCopilot-${{ matrix.GOOS }}-${{ matrix.GOARCH }}.exe
+          FILE_NAME: PoCopilot-${{ matrix.GOOS }}-${{ matrix.GOARCH }}${{ endsWith(github.ref_name, 'windows') && '.exe' || '' }}
         run: $HOME/go/bin/wails build -m -s -trimpath -skipbindings -devtools -o ${{ env.FILE_NAME }}
 
       - name: Upload ${{ matrix.GOOS }}-${{ matrix.GOARCH }}
         uses: actions/upload-release-asset@v1
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FILE_NAME: PoCopilot-${{ matrix.GOOS }}-${{ matrix.GOARCH }}.exe
         with:
           upload_url: ${{ needs.CreateRelease.outputs.upload_url }}
