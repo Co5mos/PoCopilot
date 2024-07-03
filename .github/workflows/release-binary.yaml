@@ -2,16 +2,15 @@ name: Wails build
 
 on:
   push:
-    tags:
-      - 'v*'
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        platform: [linux/amd64, windows/amd64, darwin/universal]
         include:
           - name: PoCopilot-linux-amd64
             os: ubuntu-latest
