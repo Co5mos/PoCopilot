@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@arwes/react": "^1.0.0-alpha.23",
+    "@arwes/react": "1.0.0-alpha.23",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@types/node": "^20.5.0",

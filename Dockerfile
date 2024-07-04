@@ -6,7 +6,7 @@ ENV GO111MODULE=on
 
 
 # 安装 wails 最新版
-RUN go install github.com/wailsapp/wails/v2/cmd/wails@v2.8.0
+RUN go install github.com/wailsapp/wails/v2/cmd/wails@v2.8.1
 
 # 安装必要软件
 RUN apt-get update && apt-get install -y curl gnupg xz-utils wget
