@@ -6,6 +6,14 @@ export function GetGithubActionLog(arg1) {
   return window['go']['main']['App']['GetGithubActionLog'](arg1);
 }
 
+export function GithubSearchCode(arg1) {
+  return window['go']['main']['App']['GithubSearchCode'](arg1);
+}
+
+export function GithubSearchPoc(arg1) {
+  return window['go']['main']['App']['GithubSearchPoc'](arg1);
+}
+
 export function ReadConfig() {
   return window['go']['main']['App']['ReadConfig']();
 }

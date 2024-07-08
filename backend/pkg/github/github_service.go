@@ -5,10 +5,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/google/go-github/v54/github"
+	"github.com/google/go-github/v61/github"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/oauth2"
 )
@@ -22,43 +24,69 @@ type Service struct {
 }
 
 type Config struct {
-	owner       string
-	repoName    string
-	githubToken string
+	Owner       string
+	RepoName    string
+	GithubToken string
+
+	proxy       string
+	proxySwitch bool
 }
 
-func NewGithubService(owner, repoName, token string) *Service {
+func NewGithubService(githubConfig *Config) (*Service, error) {
 
 	ctx := context.Background()
 
 	s := &Service{
-		ctx: &ctx,
-		config: &Config{
-			owner:       owner,
-			repoName:    repoName,
-			githubToken: token,
-		},
+		ctx:         &ctx,
+		config:      githubConfig,
 		EndProgress: make(chan struct{}),
 		TargetNum:   0,
 	}
-	s.GetGithubClient()
-	return s
+	err := s.GetGithubClient()
+	if err != nil {
+		return nil, err
+	}
+
+	return s, nil
 }
 
 /*
 GetGithubClient
 获取 github client
 */
-func (g *Service) GetGithubClient() {
-	//ctx := context.Background()
-	ts := oauth2.StaticTokenSource(
-		&oauth2.Token{AccessToken: g.config.githubToken},
-	)
-	tc := oauth2.NewClient(*g.ctx, ts)
-	client := github.NewClient(tc)
+func (g *Service) GetGithubClient() error {
 
+	tc := &http.Client{}
+	ts := oauth2.StaticTokenSource(
+		&oauth2.Token{AccessToken: g.config.GithubToken},
+	)
+
+	if g.config.proxySwitch {
+		proxyUrl, err := url.Parse(g.config.proxy)
+
+		if err != nil {
+			return err
+		}
+
+		transport := &http.Transport{
+			Proxy: http.ProxyURL(proxyUrl),
+		}
+
+		// Create an OAuth2 client with a custom HTTP client
+		tc = &http.Client{
+			Transport: &oauth2.Transport{
+				Source: ts,
+				Base:   transport,
+			},
+		}
+	} else {
+		tc = oauth2.NewClient(*g.ctx, ts)
+	}
+
+	client := github.NewClient(tc)
 	g.client = client
-	//g.ctx = &ctx
+
+	return nil
 }
 
 /*
@@ -223,7 +251,7 @@ func (g *Service) GetJobLog(owner, repoName string, job *github.WorkflowJob) (*s
 	// TODO 日志量太大，内存占用过大
 	client := resty.New()
 
-	jobLogURL, _, err := g.client.Actions.GetWorkflowJobLogs(*g.ctx, owner, repoName, *job.ID, true)
+	jobLogURL, _, err := g.client.Actions.GetWorkflowJobLogs(*g.ctx, owner, repoName, *job.ID, 1)
 	if err != nil {
 		logrus.Errorf("GetWorkflowJobLogs error: %s", err.Error())
 		return nil, err

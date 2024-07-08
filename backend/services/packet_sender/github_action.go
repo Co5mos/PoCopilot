@@ -10,8 +10,15 @@ import (
 )
 
 func SendGithubAction(owner, repoName, token, rawData string, targetList []string) services.Msg {
-	gas := github.NewGithubActionSender(owner, repoName, token)
-	err := gas.Send(rawData, targetList)
+	gas, err := github.NewGithubActionSender(owner, repoName, token)
+	if err != nil {
+		return services.Msg{
+			Code: 500,
+			Msg:  err.Error(),
+		}
+	}
+
+	err = gas.Send(rawData, targetList)
 	if err != nil {
 		return services.Msg{
 			Code: 500,
@@ -27,7 +34,20 @@ func SendGithubAction(owner, repoName, token, rawData string, targetList []strin
 
 func GetGithubActionLog(owner, repoName, token string, targetNum int, ws *common.WebsocketService) services.Msg {
 
-	gas := github.NewGithubService(owner, repoName, token)
+	githubConfig := &github.Config{
+		Owner:       owner,
+		RepoName:    repoName,
+		GithubToken: token,
+	}
+
+	gas, err := github.NewGithubService(githubConfig)
+	if err != nil {
+		return services.Msg{
+			Code: 500,
+			Msg:  err.Error(),
+		}
+	}
+
 	gas.TargetNum = targetNum
 	time.Sleep(2 * time.Second)
 
@@ -68,10 +88,6 @@ func GetGithubActionLog(owner, repoName, token string, targetNum int, ws *common
 			}
 
 			prettyAcLog := common.PrettyLog(*acLog)
-			if err != nil {
-				logrus.Errorf("Error prettifying log: %s", err)
-				continue
-			}
 
 			// Check if WebSocket is still active before sending
 			if ws != nil && prettyAcLog != nil {

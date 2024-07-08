@@ -8,6 +8,7 @@ import "./App.css";
 
 import HomePage from "./home/index";
 import GithubActionPage from "./packet_sender/github_action/index";
+import GithubSearchPage from "./info_collect/github_search";
 import SettingsPage from "./settings/index";
 
 import { type CSSObject, Global } from "@emotion/react";
@@ -28,6 +29,7 @@ function getOpenKeysFromPathname(pathname: string): string[] {
     // 使用一个对象来映射 pathname 到 openKeys
     const pathnameToOpenKeysMap: { [key: string]: string[] } = {
         "/github_action": ["/packet_sender"],
+        "/github_search": ["/info_collect"],
     };
 
     // 从映射中获取 openKeys，如果没有找到则返回一个空数组
@@ -55,6 +57,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<HomePage />}></Route>
                         <Route path="/github_action" element={<GithubActionPage />}></Route>
+                        <Route path="/github_search" element={<GithubSearchPage />}></Route>
                         <Route path="/settings" element={<SettingsPage />}></Route>
                     </Routes>
                 </Layout>
@@ -94,6 +97,12 @@ function Navigation({ openKeys, setOpenKeys }: NavigationProps) {
             <SubMenu key="/packet_sender" icon={<SecurityScanOutlined />} title="发包器">
                 <MemoizedMenuItem key="/github_action" icon={<GithubOutlined />}>
                     <Link to="/github_action">Github Action</Link>
+                </MemoizedMenuItem>
+            </SubMenu>
+
+            <SubMenu key="/info_collect" icon={<CompassOutlined />} title="信息收集">
+                <MemoizedMenuItem key="/github_search">
+                    <Link to="/github_search">GithubSearch</Link>
                 </MemoizedMenuItem>
             </SubMenu>
 

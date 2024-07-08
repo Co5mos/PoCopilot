@@ -3,6 +3,7 @@ package main
 import (
 	"PoCopilot/backend/common"
 	"PoCopilot/backend/services"
+	"PoCopilot/backend/services/info_collect"
 	"PoCopilot/backend/services/packet_sender"
 	"PoCopilot/backend/services/settings"
 	"context"
@@ -68,4 +69,18 @@ func (a *App) SendGithubAction(rawData string, targetList []string) services.Msg
 // GetGithubActionLog 获取 GitHub action 日志
 func (a *App) GetGithubActionLog(targetNum int) services.Msg {
 	return packet_sender.GetGithubActionLog(a.Config.Owner, a.Config.RepoName, a.Config.GithubToken, targetNum, a.WebsocketService)
+}
+
+/*
+信息收集
+*/
+
+// GithubSearchPoc GithubSearchPoc
+func (a *App) GithubSearchPoc(keyword string) services.Msg {
+	return info_collect.GithubSearchPoc(a.Config.GithubToken, keyword)
+}
+
+// GithubSearchCode GithubSearchCode
+func (a *App) GithubSearchCode(htmlURL string) services.Msg {
+	return info_collect.GithubSearchCode(a.Config.GithubToken, htmlURL)
 }
