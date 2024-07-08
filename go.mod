@@ -4,7 +4,7 @@ go 1.21.4
 
 require (
 	github.com/go-resty/resty/v2 v2.11.0
-	github.com/google/go-github/v54 v54.0.0
+	github.com/google/go-github/v61 v61.0.0
 	github.com/gorilla/websocket v1.5.1
 	github.com/projectdiscovery/goflags v0.1.40
 	github.com/sirupsen/logrus v1.9.3
@@ -14,11 +14,9 @@ require (
 )
 
 require (
-	github.com/ProtonMail/go-crypto v0.0.0-20230828082145-3c4c8a2d2371 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/bep/debounce v1.2.1 // indirect
-	github.com/cloudflare/circl v1.3.7 // indirect
 	github.com/cnf/structhash v0.0.0-20201127153200-e1b16c1ebc08 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/godbus/dbus/v5 v5.1.0 // indirect

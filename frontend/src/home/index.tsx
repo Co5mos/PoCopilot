@@ -18,7 +18,12 @@ function HomePage() {
             title: "GithubAction",
             description: "使用 Github Action 发包",
             route: "/github_action",
-        }
+        },
+        {
+            title: "GithubSearch",
+            description: "Github检索",
+            route: "/github_search",
+        },
     ];
 
     const chunkedTools = chunkArray([...tools], 3);

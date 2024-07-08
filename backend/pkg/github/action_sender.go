@@ -13,11 +13,21 @@ type ActionSender struct {
 	githubService *Service
 }
 
-func NewGithubActionSender(owner, repoName, token string) *ActionSender {
+func NewGithubActionSender(owner, repoName, token string) (*ActionSender, error) {
 
 	gas := &ActionSender{}
-	gas.githubService = NewGithubService(owner, repoName, token)
-	return gas
+	githubConfig := &Config{
+		Owner:       owner,
+		RepoName:    repoName,
+		GithubToken: token,
+	}
+	githubService, err := NewGithubService(githubConfig)
+	if err != nil {
+		return nil, err
+	}
+
+	gas.githubService = githubService
+	return gas, nil
 }
 
 // Send 发送 github action 操作
@@ -32,7 +42,7 @@ func (a *ActionSender) Send(rawData string, targetList []string) error {
 	logrus.Info("Create Action File Success")
 
 	// 创建 workflows 文件
-	err = a.githubService.CreateFile(a.githubService.config.owner, a.githubService.config.repoName, []byte(*ac))
+	err = a.githubService.CreateFile(a.githubService.config.Owner, a.githubService.config.RepoName, []byte(*ac))
 	if err != nil {
 		logrus.Errorf("Create Workflows File Error: %s", err)
 		return err

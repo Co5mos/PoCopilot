@@ -5,6 +5,10 @@ import {common} from '../models';
 
 export function GetGithubActionLog(arg1:number):Promise<services.Msg>;
 
+export function GithubSearchCode(arg1:string):Promise<services.Msg>;
+
+export function GithubSearchPoc(arg1:string):Promise<services.Msg>;
+
 export function ReadConfig():Promise<common.Config>;
 
 export function SendGithubAction(arg1:string,arg2:Array<string>):Promise<services.Msg>;

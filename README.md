@@ -7,9 +7,12 @@
 
 ## 工具说明
 
+![pocopilot](images/pocopilot.png)
+
+
 ### 1. 设置
 
-![](./images/settings.png)
+![settings](images/settings.png)
 
 日志及配置文件路径：
 
@@ -51,16 +54,27 @@ http://www.cip.cc
 https://www.baidu.com
 ```
 
-![](./images/github-action.png)
+![github-action](images/github-action.png)
 
-![](./images/github-action2.png)
+![github-action2](images/github-action2.png)
+
+
+### 3. GithubSearch
+
+通过 Github 进行 POC 查询，检索后缀为 yaml 和 py 的文件，及相关所有的仓库。
+
+![GithubSearch](images/github-search.png)
+
+点击文件名，可以查看详细 POC 内容
+
+![github-search-2](images/github-search-2.png)
 
 
 ## 手动编译
 
-v0.0.1
+v0.0.2
 
-可参考 [Dockerfile](./Dockerfile) 进行编译。
+可参考 [Dockerfile](Dockerfile) 进行编译。
 
 1. 安装 go 1.21 及以上版本
 2. 安装 nodejs 16 及以上版本
@@ -68,6 +82,6 @@ v0.0.1
 
 ```bash
 npm install
-go install github.com/wailsapp/wails/v2/cmd/wails@v2.8.0
+go install github.com/wailsapp/wails/v2/cmd/wails@v2.8.1
 wails build -upx
 ```

@@ -16,4 +16,7 @@ type Config struct {
 	GithubToken string `yaml:"GithubToken"` // github token
 	Owner       string `yaml:"Owner"`       // github 仓库拥有者
 	RepoName    string `yaml:"RepoName"`    // github 仓库名称
+
+	ProxySwitch bool   `yaml:"ProxySwitch"` // 代理开关
+	Proxy       string `yaml:"Proxy"`       // 代理
 }
